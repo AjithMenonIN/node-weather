@@ -1,8 +1,17 @@
 const request = require('request');
-
+const readline = require('readline');
 let apiKey = '8de2827ef42830e3b55e295689a56eab';
-let city = 'portland';
-let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
+
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+rl.question('Enter City ', (city) => {
+  let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
+
+
+
 
 request(url, function (err, response, body) {
   if(err){
@@ -13,4 +22,5 @@ request(url, function (err, response, body) {
     let message = `It's ${temp} degrees in ${weather.name}!`;
     console.log(message);
   }
+  rl.close();});
 });
